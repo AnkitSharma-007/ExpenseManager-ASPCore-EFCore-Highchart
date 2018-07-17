@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +21,14 @@ namespace ExpenseManager.Models
             }
         }
 
+        // To filter out the records based on the search string 
         public IEnumerable<ExpenseReport> GetSearchResult(string searchString)
         {
             List<ExpenseReport> exp = new List<ExpenseReport>();
             try
             {
                 exp = GetAllExpenses().ToList();
-                return exp.Where(s => s.ItemName.Contains(searchString));
+                return exp.Where(x => x.ItemName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1);
             }
             catch
             {
@@ -100,7 +101,6 @@ namespace ExpenseManager.Models
         {
             ExpensesDataAcessLayer objexpense = new ExpensesDataAcessLayer();
             List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
-            ///lstEmployee = objexpense.GetAllExpensesAsync().ToList();
 
             Dictionary<string, decimal> dictMonthlySum = new Dictionary<string, decimal>();
 
@@ -137,7 +137,6 @@ namespace ExpenseManager.Models
         {
             ExpensesDataAcessLayer objexpense = new ExpensesDataAcessLayer();
             List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
-            //  lstEmployee = objexpense.GetAllExpensesAsync().ToList();
 
             Dictionary<string, decimal> dictWeeklySum = new Dictionary<string, decimal>();
 
