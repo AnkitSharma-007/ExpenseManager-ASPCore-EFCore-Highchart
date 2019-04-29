@@ -1,3 +1,4 @@
+using ExpenseManager.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace ExpenseManager.Models
 {
-    public class ExpensesDataAcessLayer
+    public class ExpensesDataAcessLayer : IExpenseService
     {
-        ExpenseDBContext db = new ExpenseDBContext();
+        private ExpenseDBContext db;
+
+        public ExpensesDataAcessLayer(ExpenseDBContext _db)
+        {
+            db = _db;
+        }
         public IEnumerable<ExpenseReport> GetAllExpenses()
         {
             try
@@ -99,7 +105,6 @@ namespace ExpenseManager.Models
         // To calculate last six months expense
         public Dictionary<string, decimal> CalculateMonthlyExpense()
         {
-            ExpensesDataAcessLayer objexpense = new ExpensesDataAcessLayer();
             List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
 
             Dictionary<string, decimal> dictMonthlySum = new Dictionary<string, decimal>();
@@ -135,7 +140,6 @@ namespace ExpenseManager.Models
         // To calculate last four weeks expense
         public Dictionary<string, decimal> CalculateWeeklyExpense()
         {
-            ExpensesDataAcessLayer objexpense = new ExpensesDataAcessLayer();
             List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
 
             Dictionary<string, decimal> dictWeeklySum = new Dictionary<string, decimal>();
