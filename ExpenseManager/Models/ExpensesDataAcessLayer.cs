@@ -145,7 +145,7 @@ namespace ExpenseManager.Models
             Dictionary<string, decimal> dictWeeklySum = new Dictionary<string, decimal>();
 
             decimal foodSum = db.ExpenseReport.Where
-                (cat => cat.Category == "Food" && (cat.ExpenseDate > DateTime.Now.AddDays(-7)))
+                (cat => cat.Category == "Food" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
                 .Select(cat => cat.Amount)
                 .Sum();
 
